@@ -1,34 +1,64 @@
-# Multiplying-two-matrix
+# Algorithm for QR Decomposition
+## Aim:
+To implement QR decomposition algorithm using the Gram-Schmidt method.
 
-## AIM:
-To create a program for multiplying  the matrix
-## ALGORITHM:
+## Equipment’s required:
+Hardware – PCs
+Anaconda – Python 3.7 Installation / Moodle-Code Runner
+## Algorithm:
+Intialize the matrix Q and u
 
-### Step 1:
-import numpy as np and give input
-### Step 2:
-then using loop statement and giving the values
-### Step 3:
-then finally printing the values
+The vector u and e is given by
 
+eqn1
 
-## PROGRAM: 
-```
+eqn2
+
+eqn3
+
+Obtain the Q matrix
+eqn4
+
+Construct the upper triangular matrix R eqn5
+
+## Program:
+Gram-Schmidt Method
+Program to QR decomposition using the Gram-Schmidt method
+Developed by:Aakash.S
+RegisterNumber: 21500657
+'''
 import numpy as np
-n =int(input())
-l1,l2 = [],[]
-for i in range(n):
-    l1.append(int(input()))
-for i in range(n):
-    l2.append(int(input()))
-value1 = np.array(l1)
-value2 = np.array(l2)
-result = value1 *value2
-print("Product of two arrays is:",result)
+def QR_Decomposition(A):
+    n,m = A.shape
+    
+    Q = np.empty((n,n))
+    u = np.empty((n,n))
+    
+    u[:,0] = A[:,0]
+    Q[:,0] = u[:,0]/np.linalg.norm(u[:,0])
+    
+    for i in range(1,n):
+        
+        u[:,i] = A[:,i]
+        for j in range(i):
+            u[:,i] -= (A[:,i] @ Q[:,j]) * Q[:,j]
+            
+        Q[:,i] = u[:,i]/np.linalg.norm(u[:,i])
+        
+    R = np.zeros((n,m))
+    for i in range(n):
+        for j in range(i,m):
+            R[i,j] = A[:,j] @ Q[:,i]
+    print(Q)
+    print(R)
+a = np.array(eval(input()))
+QR_Decomposition(a)
 
-```
-## OUTPUT:
-![output](s8.png)
-![]()
-## RESULT:
-we succesfully finished th program
+Input:
+Output 2
+
+Output
+Output 1
+
+Result
+Thus the QR decomposition algorithm using the Gram-Schmidt process is written and verified the result.
